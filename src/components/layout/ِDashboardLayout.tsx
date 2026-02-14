@@ -25,13 +25,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <Flex minH="100vh" bg={bg}>
-      {/* Sidebar */}
       <Box
         w={isSidebarOpen ? 60 : 16}
         bg="teal.600"
         color="white"
-        p={4}
-        transition="width 0.2s"
+        p={isSidebarOpen ? 4 : 2}
+        transition="width 0.2s, padding 0.2s"
+        overflow="hidden"
       >
         <VStack align="stretch" spacing={4}>
           <HStack justifyContent={isSidebarOpen ? "space-between" : "center"}>
@@ -45,32 +45,38 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </HStack>
 
           <Divider borderColor="teal.300" />
-
-          <VStack align="stretch" spacing={2}>
-            <Link href="/dashboard/products">
-              <Button
-                variant="ghost"
-                justifyContent={isSidebarOpen ? "flex-start" : "center"}
-                colorScheme="teal"
-              >
-                Products
-              </Button>
-            </Link>
-
-            <Link href="/dashboard/users">
-              <Button
-                variant="ghost"
-                justifyContent={isSidebarOpen ? "flex-start" : "center"}
-                colorScheme="teal"
-              >
-                Users
-              </Button>
-            </Link>
-          </VStack>
+          {isSidebarOpen && (
+            <VStack align="stretch" spacing={2}>
+              <Link href="/dashboard/products">
+                <Button
+                  variant="ghost"
+                  justifyContent="flex-start"
+                  colorScheme="teal"
+                  size="md"
+                  fontSize="md"
+                  _hover={{ bg: "teal.500", color: "white" }}
+                  color="white"
+                >
+                  Products
+                </Button>
+              </Link>
+              <Link href="/dashboard/users">
+                <Button
+                  variant="ghost"
+                  justifyContent="flex-start"
+                  colorScheme="teal"
+                  size="md"
+                  fontSize="md"
+                  _hover={{ bg: "teal.500", color: "white" }}
+                  color="white"
+                >
+                  Users
+                </Button>
+              </Link>
+            </VStack>
+          )}
         </VStack>
       </Box>
-
-      {/* Main content */}
       <Box flex="1" p={6}>
         {children}
       </Box>
