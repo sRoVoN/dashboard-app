@@ -1,4 +1,5 @@
-import { ProductsResponse } from "../../../types/products";
+import { ProductsResponse } from './../../types/products';
+
 
 
 export const fetchProducts = async(

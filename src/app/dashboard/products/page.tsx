@@ -15,7 +15,8 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useProductQuery } from "../../hooks/useProductsQuery";
+import { useProductQuery } from "../../../hooks/useProductsQuery";
+
 
 
 export default function ProductsPage() {
