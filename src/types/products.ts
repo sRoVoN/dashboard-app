@@ -1,15 +1,14 @@
-export interface Product {
+export interface Game {
   id: number;
-  title: string;
-  description: string;
-  price: number;  
-  thumbnail: string;      
-  images: string[];       
+  name: string;
+  released: string;
+  background_image: string;
+  rating: number;
 }
 
-export interface ProductsResponse {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
+export interface GamesResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Game[];
 }

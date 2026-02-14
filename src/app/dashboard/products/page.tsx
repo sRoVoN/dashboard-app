@@ -15,15 +15,13 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useProductQuery } from "../../../hooks/useProductsQuery";
+import { useGamesQuery } from "../../../hooks/useGamesQuery";
 
-
-
-export default function ProductsPage() {
+export default function GamesPage() {
   const [page, setPage] = useState(1);
-  const limit = 8;
+  const pageSize = 8;
 
-  const { data, isLoading, error } = useProductQuery(page, limit);
+  const { data, isLoading, error } = useGamesQuery(page, pageSize);
 
   if (isLoading)
     return (
@@ -41,24 +39,23 @@ export default function ProductsPage() {
 
   return (
     <VStack spacing={8} align="stretch">
-      {/* Products Grid */}
       <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing={6}>
-        {data?.products.map((product) => (
-          <Card key={product.id} borderRadius="xl" overflow="hidden" shadow="md">
+        {data?.results.map((game) => (
+          <Card key={game.id} borderRadius="xl" overflow="hidden" shadow="md">
             <CardBody p={0}>
               <Image
-                src={product.thumbnail}
-                alt={product.title}
+                src={game.background_image}
+                alt={game.name}
                 h="200px"
                 w="100%"
                 objectFit="cover"
               />
               <Box p={4}>
                 <Text fontWeight="bold" fontSize="md" noOfLines={1}>
-                  {product.title}
+                  {game.name}
                 </Text>
 
-                <Link href={`/dashboard/products/${product.id}`}>
+                <Link href={`/dashboard/products/${game.id}`}>
                   <Button mt={3} size="sm" colorScheme="teal" w="full">
                     View Details
                   </Button>
@@ -69,12 +66,8 @@ export default function ProductsPage() {
         ))}
       </SimpleGrid>
 
-      {/* Pagination */}
       <HStack justify="center" spacing={4}>
-        <Button
-          onClick={() => setPage((p) => Math.max(p - 1, 1))}
-          isDisabled={page === 1}
-        >
+        <Button onClick={() => setPage((p) => Math.max(p - 1, 1))} isDisabled={page === 1}>
           Previous
         </Button>
 
@@ -82,11 +75,9 @@ export default function ProductsPage() {
 
         <Button
           onClick={() =>
-            setPage((p) =>
-              p * limit >= (data?.total ?? 0) ? p : p + 1
-            )
+            setPage((p) => (data && data.results.length === pageSize ? p + 1 : p))
           }
-          isDisabled={page * limit >= (data?.total ?? 0)}
+          isDisabled={data && data.results.length < pageSize}
         >
           Next
         </Button>

@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "test-fetch.mjs"  ],
   "exclude": [
     "node_modules"
   ]

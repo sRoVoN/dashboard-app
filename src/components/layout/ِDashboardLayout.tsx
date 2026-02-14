@@ -47,6 +47,19 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <Divider borderColor="teal.300" />
           {isSidebarOpen && (
             <VStack align="stretch" spacing={2}>
+              <Link href="/dashboard/login">
+                <Button
+                  variant="ghost"
+                  justifyContent="flex-start"
+                  colorScheme="teal"
+                  size="md"
+                  fontSize="md"
+                  _hover={{ bg: "teal.500", color: "white" }}
+                  color="white"
+                >
+                  Login
+                </Button>
+              </Link>
               <Link href="/dashboard/products">
                 <Button
                   variant="ghost"
