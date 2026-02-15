@@ -47,7 +47,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <Divider borderColor="teal.300" />
           {isSidebarOpen && (
             <VStack align="stretch" spacing={2}>
-              <Link href="/dashboard/login">
+              <Link href="/dashboard/auth/login">
                 <Button
                   variant="ghost"
                   justifyContent="flex-start"
